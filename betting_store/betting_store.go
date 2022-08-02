@@ -6,7 +6,7 @@ import (
 
 type BettingData struct {
 	XBetLink   string `json:"1xBetLink"`
-	MelbetLink string `json:"LeonLink"`
+	MelbetLink string `json:"MelbetLink"`
 	WinLink    string `json:"WinLink"`
 
 	AppIsOnReview bool `json:"onReview"`
@@ -35,20 +35,18 @@ func (ts *BettingStore) ChangeReviewValue(newOnReviewValue bool) bool {
 	return ts.bettingData.AppIsOnReview
 }
 
+func (ts *BettingStore) GetReviewValue() bool {
+	return ts.bettingData.AppIsOnReview
+}
+
 func (ts *BettingStore) GetMelbetLink() string {
-	ts.Lock()
-	defer ts.Unlock()
 	return ts.bettingData.MelbetLink
 }
 
 func (ts *BettingStore) Get1XbetLink() string {
-	ts.Lock()
-	defer ts.Unlock()
 	return ts.bettingData.XBetLink
 }
 
 func (ts *BettingStore) GetWinLink() string {
-	ts.Lock()
-	defer ts.Unlock()
 	return ts.bettingData.WinLink
 }
