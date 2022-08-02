@@ -5,9 +5,11 @@ import (
 )
 
 type BettingData struct {
-	XBetLink      string `json:"1xBetLink"`
-	LeonLink      string `json:"LeonLink"`
-	AppIsOnReview bool   `json:"onReview"`
+	XBetLink   string `json:"1xBetLink"`
+	MelbetLink string `json:"LeonLink"`
+	WinLink    string `json:"WinLink"`
+
+	AppIsOnReview bool `json:"onReview"`
 }
 
 type BettingStore struct {
@@ -18,8 +20,9 @@ type BettingStore struct {
 
 func New() *BettingStore {
 	ts := &BettingStore{}
-	ts.bettingData.XBetLink = "" // set 1xbet referral link later
-	ts.bettingData.LeonLink = "" // set later
+	ts.bettingData.XBetLink = "https://refpa6627021.top/L?tag=d_871311m_1599c_&site=871311&ad=1599"
+	ts.bettingData.MelbetLink = "https://refpa31055.top/L?tag=s_875293m_18637c_&site=875293&ad=18637"
+	ts.bettingData.WinLink = "https://1wlint.top/?open=register#x6ev"
 	ts.bettingData.AppIsOnReview = false
 	return ts
 }
@@ -32,14 +35,20 @@ func (ts *BettingStore) ChangeReviewValue(newOnReviewValue bool) bool {
 	return ts.bettingData.AppIsOnReview
 }
 
-func (ts *BettingStore) GetLionLink() string {
+func (ts *BettingStore) GetMelbetLink() string {
 	ts.Lock()
 	defer ts.Unlock()
-	return ts.bettingData.LeonLink
+	return ts.bettingData.MelbetLink
 }
 
 func (ts *BettingStore) Get1XbetLink() string {
 	ts.Lock()
 	defer ts.Unlock()
 	return ts.bettingData.XBetLink
+}
+
+func (ts *BettingStore) GetWinLink() string {
+	ts.Lock()
+	defer ts.Unlock()
+	return ts.bettingData.WinLink
 }
