@@ -130,5 +130,5 @@ func main() {
 	server := NewTaskServer()
 	mux.HandleFunc("/", server.dataHandler)
 
-	log.Fatal(http.ListenAndServe("localhost:"+os.Getenv("SERVERPORT"), mux))
+	log.Fatal(http.ListenAndServe(":8000"+os.Getenv("SERVERPORT"), mux))
 }
