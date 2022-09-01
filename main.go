@@ -128,7 +128,7 @@ func (ts *taskServer) setReviewValue(w http.ResponseWriter, req *http.Request) {
 func main() {
 	mux := http.NewServeMux()
 	server := NewTaskServer()
-	mux.HandleFunc("/", server.dataHandler)
+	mux.HandleFunc("/", server.dataHandler) //http://127.0.0.1:8000/get1winLink to get data
 
 	log.Fatal(http.ListenAndServe(":8000"+os.Getenv("SERVERPORT"), mux))
 }
