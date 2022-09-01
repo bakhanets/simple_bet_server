@@ -1,0 +1,9 @@
+services:
+  bet-service:
+    build: .
+    image: bet-service
+    container_name: bet-service
+    ports:
+      - "8000:8000"
+    environment:
+      ServerPort: "8000"
