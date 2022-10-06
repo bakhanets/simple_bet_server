@@ -7,3 +7,5 @@ services:
       - "8000:8000"
     environment:
       ServerPort: "8000"
+    volumes:
+      - ./data:/data
