@@ -1,7 +1,7 @@
 package main
 
 import (
-	"betting_server/betting_store"
+	"betting_server/links_storage"
 	"encoding/json"
 	"log"
 	"mime"
@@ -9,35 +9,62 @@ import (
 	"os"
 )
 
-var store = betting_store.NewBettingStore()
+var storage links_storage.Storage
 
-func get1winLink(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling get 1win link %s\n", req.URL.Path)
-	w.Header().Set("Content-Type", "application/json")
-	_, _ = w.Write([]byte(store.GetWinLink()))
+// legacy block start
+func get1Link(w http.ResponseWriter, _ *http.Request) {
+	log.Printf("handling get v1 link")
+	writeResponse(w, "v1")
 }
 
-func getMelbetLink(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling get Melbet link %s\n", req.URL.Path)
-	w.Header().Set("Content-Type", "application/json")
-	_, _ = w.Write([]byte(store.GetMelBetLink()))
+func get2Link(w http.ResponseWriter, _ *http.Request) {
+	log.Printf("handling get v2 link")
+	writeResponse(w, "v2")
 }
 
-func get1xbetLink(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling get 1xbetLink %s\n", req.URL.Path)
+func get3Link(w http.ResponseWriter, _ *http.Request) {
+	log.Printf("handling get v3 link")
+	writeResponse(w, "v3")
+}
+
+func get4Link(w http.ResponseWriter, _ *http.Request) {
+	log.Printf("handling get v4 link")
+	writeResponse(w, "v4")
+} // legacy block end
+
+func handleFunc(w http.ResponseWriter, req *http.Request) {
+	log.Printf("handling get link %s\n", req.URL.Path)
+	err := req.ParseForm()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	if !req.Form.Has("key") {
+		http.Error(w, "Error: value for \"key\" not found", http.StatusBadRequest)
+		return
+	}
+	writeResponse(w, req.Form.Get("key"))
+}
+
+func writeResponse(w http.ResponseWriter, key string) {
+	value, ok := storage.GetValueByKey(key)
+	if !ok {
+		http.Error(w, "No value for this key", http.StatusNotFound)
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
-	_, _ = w.Write([]byte(store.Get1XBetLink()))
+	_, _ = w.Write([]byte(value))
 }
 
 func setReviewValue(w http.ResponseWriter, req *http.Request) {
 	log.Printf("handling task create at %s\n", req.URL.Path)
 	contentType := req.Header.Get("Content-Type")
-	mediatype, _, err := mime.ParseMediaType(contentType)
+	mediaType, _, err := mime.ParseMediaType(contentType)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	if mediatype != "application/json" {
+	if mediaType != "application/json" {
 		http.Error(w, "expect application/json Content-Type", http.StatusUnsupportedMediaType)
 		return
 	}
@@ -52,7 +79,7 @@ func setReviewValue(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	store.ChangeReviewValue(rt.NewReviewValue)
+	storage.SetReviewValue(rt.NewReviewValue)
 	w.Header().Set("Content-Type", "application/json")
 	_, _ = w.Write([]byte("\"Success\""))
 }
@@ -63,9 +90,18 @@ func main() {
 	if ok {
 		port = ":" + osPort
 	}
-	http.HandleFunc("/v1/getPredictionsList", get1xbetLink)
-	http.HandleFunc("/v2/getPredictionsList", get1winLink)
-	http.HandleFunc("/v3/getPredictionsList", getMelbetLink)
+	err := storage.LoadValues()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	storage.SetReviewValue(true)
+	// legacy block start
+	http.HandleFunc("/v1/getPredictionsList", get1Link)
+	http.HandleFunc("/v2/getPredictionsList", get2Link)
+	http.HandleFunc("/v3/getPredictionsList", get3Link)
+	http.HandleFunc("/v4/getPredictionsList", get4Link)
+	// legacy block end
+	http.HandleFunc("/getPredictionsList", handleFunc)
 	http.HandleFunc("/setReviewValue", setReviewValue)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
