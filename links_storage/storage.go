@@ -12,9 +12,14 @@ const linksJsonFileName = "data/Links.json"
 
 type Storage struct {
 	m             sync.RWMutex
-	links         map[string]string
+	links         map[string]linkRecord
 	defaultData   string
 	appIsOnReview bool
+}
+
+type linkRecord struct {
+	link      string
+	countries []string
 }
 
 func (s *Storage) loadLinksMap() error {
@@ -22,9 +27,18 @@ func (s *Storage) loadLinksMap() error {
 	if err != nil {
 		return errors.New("error opening file \"" + linksJsonFileName + "\" with links: " + err.Error())
 	}
-
-	if err = json.NewDecoder(file).Decode(&s.links); err != nil {
+	var data map[string]map[string][]string
+	if err = json.NewDecoder(file).Decode(&data); err != nil {
 		return errors.New("error decoding json with links from file \"" + linksJsonFileName + "\": " + err.Error())
+	}
+	s.links = make(map[string]linkRecord)
+	for key, val := range data {
+		for link, countries := range val {
+			s.links[key] = linkRecord{
+				link:      link,
+				countries: countries,
+			}
+		}
 	}
 	return nil
 }
@@ -57,9 +71,19 @@ func (s *Storage) GetValueByKeyForCountry(key string, isoCountryCode string) (st
 	}
 	s.m.RLock()
 	defer s.m.RUnlock()
-	if s.appIsOnReview {
-		return s.defaultData, true
+	value, ok := s.links[key]
+	if ok {
+		if s.appIsOnReview {
+			return s.defaultData, true
+		} else {
+			for _, code := range value.countries {
+				if code == isoCountryCode {
+					return value.link, true
+				}
+			}
+			return s.defaultData, true
+		}
+	} else {
+		return "", false
 	}
-	value := s.links[key]
-	return "\"" + s.links[key] + "\"", value != ""
 }
