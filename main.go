@@ -12,24 +12,24 @@ import (
 var storage links_storage.Storage
 
 // legacy block start
-func get1Link(w http.ResponseWriter, _ *http.Request) {
+func get1Link(w http.ResponseWriter, req *http.Request) {
 	log.Printf("handling get v1 link")
-	writeResponse(w, "v1")
+	writeResponse(w, req, "v1")
 }
 
-func get2Link(w http.ResponseWriter, _ *http.Request) {
+func get2Link(w http.ResponseWriter, req *http.Request) {
 	log.Printf("handling get v2 link")
-	writeResponse(w, "v2")
+	writeResponse(w, req, "v2")
 }
 
-func get3Link(w http.ResponseWriter, _ *http.Request) {
+func get3Link(w http.ResponseWriter, req *http.Request) {
 	log.Printf("handling get v3 link")
-	writeResponse(w, "v3")
+	writeResponse(w, req, "v3")
 }
 
-func get4Link(w http.ResponseWriter, _ *http.Request) {
+func get4Link(w http.ResponseWriter, req *http.Request) {
 	log.Printf("handling get v4 link")
-	writeResponse(w, "v4")
+	writeResponse(w, req, "v4")
 } // legacy block end
 
 func handleFunc(w http.ResponseWriter, req *http.Request) {
@@ -43,10 +43,11 @@ func handleFunc(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, "Error: value for \"key\" not found", http.StatusBadRequest)
 		return
 	}
-	writeResponse(w, req.Form.Get("key"))
+	writeResponse(w, req, req.Form.Get("key"))
 }
 
-func writeResponse(w http.ResponseWriter, key string) {
+func writeResponse(w http.ResponseWriter, req *http.Request, key string) {
+	log.Println(req.RemoteAddr)
 	value, ok := storage.GetValueByKey(key)
 	if !ok {
 		http.Error(w, "No value for this key", http.StatusNotFound)

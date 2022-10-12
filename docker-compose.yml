@@ -9,3 +9,12 @@ services:
       ServerPort: "8000"
     volumes:
       - ./data:/data
+  geoipupdate:
+    image: maxmindinc/geoipupdate
+    environment:
+      GEOIPUPDATE_FREQUENCY: 24
+      GEOIPUPDATE_ACCOUNT_ID: 777155
+      GEOIPUPDATE_LICENSE_KEY: HhJ3cMvkJxbo3NGN
+      GEOIPUPDATE_EDITION_IDS: GeoLite2-Country
+    volumes:
+      - /geoip:/usr/share/GeoIP maxmindinc/geoipupdate
