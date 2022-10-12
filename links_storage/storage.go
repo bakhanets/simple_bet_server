@@ -20,11 +20,11 @@ type Storage struct {
 func (s *Storage) loadLinksMap() error {
 	file, err := os.Open(linksJsonFileName)
 	if err != nil {
-		return errors.New("error opening file \"" + defaultValueFileName + "\" with links: " + err.Error())
+		return errors.New("error opening file \"" + linksJsonFileName + "\" with links: " + err.Error())
 	}
 
 	if err = json.NewDecoder(file).Decode(&s.links); err != nil {
-		return errors.New("error decoding json with links from file \"" + defaultValueFileName + "\": " + err.Error())
+		return errors.New("error decoding json with links from file \"" + linksJsonFileName + "\": " + err.Error())
 	}
 	return nil
 }
@@ -51,7 +51,10 @@ func (s *Storage) SetReviewValue(newValue bool) {
 	s.appIsOnReview = newValue
 }
 
-func (s *Storage) GetValueByKey(key string) (string, bool) {
+func (s *Storage) GetValueByKeyForCountry(key string, isoCountryCode string) (string, bool) {
+	if isoCountryCode == "" {
+		return "", false
+	}
 	s.m.RLock()
 	defer s.m.RUnlock()
 	if s.appIsOnReview {

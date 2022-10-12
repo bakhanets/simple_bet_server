@@ -3,37 +3,37 @@ package main
 import (
 	"betting_server/links_storage"
 	"encoding/json"
+	"github.com/oschwald/maxminddb-golang"
 	"log"
 	"mime"
+	"net"
 	"net/http"
 	"os"
+	"strings"
 )
 
 var storage links_storage.Storage
 
+const geoLiteCountryDBPath = "/geoip/GeoLite2-Country.mmdb"
+
 // legacy block start
 func get1Link(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling get v1 link")
 	writeResponse(w, req, "v1")
 }
 
 func get2Link(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling get v2 link")
 	writeResponse(w, req, "v2")
 }
 
 func get3Link(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling get v3 link")
 	writeResponse(w, req, "v3")
 }
 
 func get4Link(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling get v4 link")
 	writeResponse(w, req, "v4")
 } // legacy block end
 
 func handleFunc(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling get link %s\n", req.URL.Path)
 	err := req.ParseForm()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -47,14 +47,51 @@ func handleFunc(w http.ResponseWriter, req *http.Request) {
 }
 
 func writeResponse(w http.ResponseWriter, req *http.Request, key string) {
-	log.Println(req.RemoteAddr)
-	value, ok := storage.GetValueByKey(key)
+	log.Printf("handling get link %s\nFrom %s", req.URL.Path, req.RemoteAddr)
+	value, ok := storage.GetValueByKeyForCountry(key, getIsoCountryNameFromIp(req.RemoteAddr))
 	if !ok {
 		http.Error(w, "No value for this key", http.StatusNotFound)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	_, _ = w.Write([]byte(value))
+}
+
+func getIsoCountryNameFromIp(remoteAddr string) (isoCode string) {
+	defer func() {
+		log.Println("got", isoCode, "for", remoteAddr)
+	}()
+	ipAndPort := strings.Split(remoteAddr, ":")
+	if len(ipAndPort) != 2 {
+		log.Println("error getting ip from \"" + remoteAddr + "\"")
+		return ""
+	}
+	ip := net.ParseIP(ipAndPort[0])
+
+	db, err := maxminddb.Open(geoLiteCountryDBPath)
+	if err != nil {
+		log.Println("error opening geoip db:", err)
+		return ""
+	}
+	defer func(db *maxminddb.Reader) {
+		err := db.Close()
+		if err != nil {
+			log.Println("error closing GeoIp db:", err)
+		}
+	}(db)
+
+	var record struct {
+		Country struct {
+			ISOCode string `maxminddb:"iso_code"`
+		} `maxminddb:"country"`
+	}
+
+	err = db.Lookup(ip, &record)
+	if err != nil {
+		log.Println("error searching for ip in geoip db:", err)
+		return ""
+	}
+	return record.Country.ISOCode
 }
 
 func setReviewValue(w http.ResponseWriter, req *http.Request) {
