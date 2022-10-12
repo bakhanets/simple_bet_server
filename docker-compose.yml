@@ -11,6 +11,7 @@ services:
       - ./data:/data
   geoipupdate:
     image: maxmindinc/geoipupdate
+    container_name: geoipupdate
     environment:
       GEOIPUPDATE_FREQUENCY: 24
       GEOIPUPDATE_ACCOUNT_ID: 777155
