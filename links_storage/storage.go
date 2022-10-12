@@ -78,7 +78,7 @@ func (s *Storage) GetValueByKeyForCountry(key string, isoCountryCode string) (st
 		} else {
 			for _, code := range value.countries {
 				if code == isoCountryCode {
-					return value.link, true
+					return "\"" + value.link + "\"", true
 				}
 			}
 			return s.defaultData, true
