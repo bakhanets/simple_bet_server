@@ -1,3 +1,3 @@
-docker stop bet-service
-docker stop geoipupdate
+docker stop bet-service geoipupdate
+docker rm bet-service geoipupdate
 docker compose up -d --build
