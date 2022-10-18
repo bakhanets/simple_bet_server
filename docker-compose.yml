@@ -10,6 +10,17 @@ services:
     volumes:
       - ./data:/data
       - geoip:/geoip
+  bet-service-us:
+    build: .
+    image: bet-service
+    container_name: bet-service
+    ports:
+      - "8001:8001"
+    environment:
+      ServerPort: "8001"
+    volumes:
+      - ./data2:/data
+      - geoip:/geoip
   geoipupdate:
     image: maxmindinc/geoipupdate
     container_name: geoipupdate

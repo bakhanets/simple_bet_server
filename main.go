@@ -139,7 +139,7 @@ func main() {
 	http.HandleFunc("/v3/getPredictionsList", get3Link)
 	http.HandleFunc("/v4/getPredictionsList", get4Link)
 	// legacy block end
-	http.HandleFunc("/getPredictionsList", handleFunc)
+	http.HandleFunc("/getValue", handleFunc)
 	http.HandleFunc("/setReviewValue", setReviewValue)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
