@@ -47,7 +47,7 @@ func handleFunc(w http.ResponseWriter, req *http.Request) {
 }
 
 func writeResponse(w http.ResponseWriter, req *http.Request, key string) {
-	log.Printf("handling get link %s\nFrom %s", req.URL.Path, req.RemoteAddr)
+	log.Printf("handling request to %s from %s", req.URL.Path, req.RemoteAddr)
 	value, ok := storage.GetValueByKeyForCountry(key, getIsoCountryNameFromIp(req.RemoteAddr))
 	if !ok {
 		http.Error(w, "No value for this key", http.StatusNotFound)
@@ -95,7 +95,7 @@ func getIsoCountryNameFromIp(remoteAddr string) (isoCode string) {
 }
 
 func setReviewValue(w http.ResponseWriter, req *http.Request) {
-	log.Printf("handling task create at %s\n", req.URL.Path)
+	log.Printf("handling request to %s\n", req.URL.Path)
 	contentType := req.Header.Get("Content-Type")
 	mediaType, _, err := mime.ParseMediaType(contentType)
 	if err != nil {
