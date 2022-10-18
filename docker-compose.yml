@@ -13,7 +13,7 @@ services:
   bet-service-us:
     build: .
     image: bet-service
-    container_name: bet-service
+    container_name: bet-service-us
     ports:
       - "8001:8001"
     environment:
