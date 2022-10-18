@@ -1,49 +1,48 @@
-{
-  "events": [
+"events": [
     {
       "playerOne": "Barcelona",
       "playerTwo": "Inter",
       "score":"3 - 3",
       "urlLogoOne":
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.stickpng.com%2Fimg%2Ficons-logos-emojis%2Ffootball%2Fspanish-football-clubs-logos%2Ffc-barcelona-logo&psig=AOvVaw1LESfoeBptxfvxAck-CGaR&ust=1666116376006000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCPC3-qjt5_oCFQAAAAAdAAAAABAp",
-      "urlLogoTwo": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AFC_Inter_Milan_first_logo_(1908-1928)_(2).png&psig=AOvVaw0m2YF1u7hemDDWlWU1iucN&ust=1666116794230000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCOCEivHu5_oCFQAAAAAdAAAAABAL"
+      "https://upload.wikimedia.org/wikipedia/tr/thumb/9/96/FCB.svg/640px-FCB.svg.png",
+      "urlLogoTwo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/1200px-FC_Internazionale_Milano_2021.svg.png"
     },
     {
       "playerOne": "Bayer Leverkusen",
       "playerTwo": "FC Porto",
       "score":"0 - 3",
       "urlLogoOne":
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FDosya%3ABayer_Leverkusen.png&psig=AOvVaw0KjuWhdr8Zej3gK1Xaw3FA&ust=1666117123095000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCPjs1Y7w5_oCFQAAAAAdAAAAABAD",
-      "urlLogoTwo": "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FDosya%3AFC.Porto.png&psig=AOvVaw3X53QOEzyeo5aRN8DsrpNO&ust=1666117175385000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCNiz5qfw5_oCFQAAAAAdAAAAABAD"
+      "https://upload.wikimedia.org/wikipedia/tr/a/a2/Bayer_Leverkusen.png",
+      "urlLogoTwo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/FC_Porto.svg/1200px-FC_Porto.svg.png"
     },{
-      "playerOne": "Pizen",
+      "playerOne": "Plzen",
       "playerTwo": "Bayern Munich",
       "score":"2 - 4",
       "urlLogoOne":
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FDosya%3AZnak_Viktoria_Plzen.png&psig=AOvVaw0HvEbbYbv3TySM8dQ37JRe&ust=1666117230942000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCKiwy8Dw5_oCFQAAAAAdAAAAABAD",
-      "urlLogoTwo": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AFC_Bayern_M%25C3%25BCnchen_logo_(2017).svg&psig=AOvVaw2m26gnBArkz1fy4MZpv28K&ust=1666117340871000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCNCrxfTw5_oCFQAAAAAdAAAAABAD"
+      "https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Viktoria_Plzen_logo.svg/1200px-Viktoria_Plzen_logo.svg.png",
+      "urlLogoTwo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/1200px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png"
     },{
       "playerOne": "Rangers",
       "playerTwo": "Liverpool",
       "score":"1 - 7",
       "urlLogoOne":
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikinews.org%2Fwiki%2FFile%3ARangers_logo.png&psig=AOvVaw14TGyOu-hi-turZrcRHkgX&ust=1666117397561000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCPDx5I_x5_oCFQAAAAAdAAAAABAD",
-      "urlLogoTwo": "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FDosya%3A150px-Liverpool_FC_logo.png&psig=AOvVaw1XDyGo1N3dR3xT3mcHq2vd&ust=1666117489536000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCLDDrrvx5_oCFQAAAAAdAAAAABAD"
+      "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Rangers_FC.svg/1200px-Rangers_FC.svg.png",
+      "urlLogoTwo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png"
     },{
       "playerOne": "Sporting CP",
       "playerTwo": "Marseille",
       "score":"0 - 2",
       "urlLogoOne":
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cleanpng.com%2Fpng-sporting-cp-football-lisbon-sports-european-multis-6778430%2F&psig=AOvVaw3xhJX2BZ-HXbfdvHghQ5P2&ust=1666117579910000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCOCNjebx5_oCFQAAAAAdAAAAABAD",
-      "urlLogoTwo": "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FDosya%3AOlympique_de_Marseille.png&psig=AOvVaw0I3kvN13RbHuy8rg_9yKev&ust=1666117632389000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCLD3gIry5_oCFQAAAAAdAAAAABAD"
+      "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Sporting_Clube_de_Portugal_%28Logo%29.svg/1200px-Sporting_Clube_de_Portugal_%28Logo%29.svg.png",
+      "urlLogoTwo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Olympique_Marseille_logo.svg/1200px-Olympique_Marseille_logo.svg.png"
     },{
       "playerOne": "Tottenham",
       "playerTwo": "Eintracht Frankfurt",
       "score":"3 - 2",
       "urlLogoOne":
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhif.wikipedia.org%2Fwiki%2Ffile%3ATottenham_Hotspur.png&psig=AOvVaw382FWXKw_Eun5BPiQXOGtt&ust=1666117711341000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCOixy6Xy5_oCFQAAAAAdAAAAABAD",
+      "https://s.yimg.com/cv/apiv2/default/soccer/20190408/500x500/Tottenham_wbg.png",
       "urlLogoTwo":
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.m.wikipedia.org%2Fwiki%2FDosya%3AEintracht_Frankfurt_Logo.svg&psig=AOvVaw2pjuo37DiguAwHui48f7EP&ust=1666117844681000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCNCsueTy5_oCFQAAAAAdAAAAABAD"
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Eintracht_Frankfurt_Logo.svg/1200px-Eintracht_Frankfurt_Logo.svg.png"
     }
   ]
 }
