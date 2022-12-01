@@ -1,37 +1,4 @@
 services:
-  bet-service:
-    build: .
-    image: bet-service
-    container_name: bet-service
-    ports:
-      - "8000:8000"
-    environment:
-      ServerPort: "8000"
-    volumes:
-      - ./data:/data
-      - geoip:/geoip
-  bet-service-us:
-    build: .
-    image: bet-service
-    container_name: bet-service-us
-    ports:
-      - "8001:8001"
-    environment:
-      ServerPort: "8001"
-    volumes:
-      - ./data2:/data
-      - geoip:/geoip
-  bet-service-3:
-    build: .
-    image: bet-service
-    container_name: bet-service-3
-    ports:
-      - "8002:8002"
-    environment:
-      ServerPort: "8002"
-    volumes:
-      - ./data3:/data
-      - geoip:/geoip
   bet-service-4:
     build: .
     image: bet-service
