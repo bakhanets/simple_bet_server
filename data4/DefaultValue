@@ -1,0 +1,24 @@
+{
+  "predictions": [
+    {
+      "date": "03.12, 18:00 GMT +3",
+      "league": "Quatar World Cup",
+      "group": "1/8 final",
+      "playerOne": "Netherlands",
+      "playerTwo": "USA",
+      "urlLogoOne": "https://www.netherlands-tourism.com/wp-content/uploads/2013/07/Flag-of-The-Netherlands3.png",
+      "urlLogoTwo": "https://cdn.britannica.com/79/4479-050-6EF87027/flag-Stars-and-Stripes-May-1-1795.jpg",
+      "predict": "Under 2.5 match goals"
+    },
+    {
+      "date": "03.12, 22:00 GMT +3",
+      "league": "Quatar World Cup",
+      "group": "1/8 final",
+      "playerOne": "Argentina",
+      "playerTwo": "Australia",
+      "urlLogoOne": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_Argentina.svg/1600px-Flag_of_Argentina.svg.png",
+      "urlLogoTwo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Australia.svg/2560px-Flag_of_Australia.svg.png",
+      "predict": "Over 2.5 match goals"
+    }
+  ]
+}
