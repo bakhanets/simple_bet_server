@@ -3,10 +3,15 @@ package links_storage
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"os"
 	"sync"
 )
 
+const OnReviewValue = "review"
+const NotOnReviewValue = "not review"
+
+const reviewValueDataFileName = "data/ReviewSavedData"
 const defaultValueFileName = "data/DefaultValue"
 const linksJsonFileName = "data/Links.json"
 
@@ -43,6 +48,20 @@ func (s *Storage) loadLinksMap() error {
 	return nil
 }
 
+func (s *Storage) loadReviewValue() {
+	s.appIsOnReview = true
+	if d, err := os.ReadFile(reviewValueDataFileName); err == nil {
+		str := string(d)
+		if str == OnReviewValue {
+			s.appIsOnReview = true
+		} else if str == NotOnReviewValue {
+			s.appIsOnReview = false
+		}
+	} else {
+		s.SetReviewValue(true)
+	}
+}
+
 func (s *Storage) loadDefaultValue() error {
 	d, err := os.ReadFile(defaultValueFileName)
 	if err != nil {
@@ -53,6 +72,7 @@ func (s *Storage) loadDefaultValue() error {
 }
 
 func (s *Storage) LoadValues() error {
+	s.loadReviewValue()
 	if err := s.loadDefaultValue(); err != nil {
 		return err
 	}
@@ -63,6 +83,15 @@ func (s *Storage) SetReviewValue(newValue bool) {
 	s.m.Lock()
 	defer s.m.Unlock()
 	s.appIsOnReview = newValue
+	var err error
+	if newValue {
+		err = os.WriteFile(reviewValueDataFileName, []byte(OnReviewValue), 0666)
+	} else {
+		err = os.WriteFile(reviewValueDataFileName, []byte(NotOnReviewValue), 0666)
+	}
+	if err != nil {
+		log.Println("error saving review data: " + err.Error())
+	}
 }
 
 func (s *Storage) GetValueByKeyForCountry(key string, isoCountryCode string) (string, bool) {

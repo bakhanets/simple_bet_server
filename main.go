@@ -132,7 +132,6 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	storage.SetReviewValue(true)
 	// legacy block start
 	http.HandleFunc("/v1/getPredictionsList", get1Link)
 	http.HandleFunc("/v2/getPredictionsList", get2Link)
